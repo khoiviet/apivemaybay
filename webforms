@@ -1,0 +1,27 @@
+protected const string Username = "khoiviet";
+protected const string Password = "...";
+
+protected void Page_Load(object sender, EventArgs e)
+{
+    try
+    {
+        AirlineTicketSoap soap = new AirlineTicketSoapClient();
+
+        var data = soap.DomesticResult(new DomesticResultRequest
+        {
+            adults = 1,
+            authentication = new Authentication
+            {
+                HeaderUser = Username,
+                HeaderPassword = Password
+            },
+            children = 0,
+            infants = 0,
+            departureDate = DateTime.Now.AddDays(5),
+            endPoint = "SGN",
+            returnDate = null,
+            startPoint = "HAN"
+        });
+    }
+    catch (Exception ex) { }
+}
